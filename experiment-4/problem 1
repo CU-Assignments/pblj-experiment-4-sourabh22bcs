@@ -1,0 +1,57 @@
+import java.util.*;
+class Card {
+    String symbol;
+    String value;
+    public Card(String symbol, String value) {
+        this.symbol = symbol;
+        this.value = value;
+    }
+    @Override
+    public String toString() {
+        return value + " of " + symbol;
+    }
+}
+public class CardCollection {
+    private Collection<Card> cards;
+    public CardCollection() {
+        this.cards = new ArrayList<>();  
+    }
+    public void addCard(String symbol, String value) {
+        cards.add(new Card(symbol, value));
+    }
+    public void findCardsBySymbol(String symbol) {
+        System.out.println("Cards of " + symbol + ":");
+        boolean found = false;
+        for (Card card : cards) {
+            if (card.symbol.equalsIgnoreCase(symbol)) {
+                System.out.println(card);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No cards found for the symbol: " + symbol);
+        }
+    }
+    public void displayAllCards() {
+        System.out.println("All cards in the collection:");
+        for (Card card : cards) {
+            System.out.println(card);
+        }
+    }
+public static void main(String[] args) {
+        CardCollection cardCollection = new CardCollection();
+        cardCollection.addCard("Hearts", "Ace");
+        cardCollection.addCard("Hearts", "2");
+        cardCollection.addCard("Diamonds", "King");
+        cardCollection.addCard("Clubs", "Queen");
+        cardCollection.addCard("Spades", "Jack");
+        cardCollection.addCard("Spades", "Ace");
+        cardCollection.displayAllCards();
+
+        cardCollection.findCardsBySymbol("Hearts");
+        cardCollection.findCardsBySymbol("Clubs");
+        cardCollection.findCardsBySymbol("Diamonds");
+        cardCollection.findCardsBySymbol("Spades");
+        cardCollection.findCardsBySymbol("Jokers");
+    }
+}
